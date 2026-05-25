@@ -1,1124 +1,1008 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Abhay — Professional Forex Trader</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
-<style>
-  :root {
-    --bg: #080A0C;
-    --bg2: #0E1115;
-    --bg3: #141820;
-    --border: #1E2530;
-    --gold: #C9A84C;
-    --gold2: #E8C97A;
-    --red: #C0392B;
-    --green: #27AE60;
-    --white: #F0F2F5;
-    --muted: #7A8494;
-    --accent: #1E3A5F;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>ABHAY — Forex Trader</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <style>
+    /* ============================================================
+       ROOT & RESET
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  html { scroll-behavior: smooth; }
+    :root {
+      --gold:   #C9A84C;
+      --green:  #27AE60;
+      --bg:     #0A0A0A;
+      --card:   #111318;
+      --border: #1E2028;
+      --text:   #E8E8E8;
+      --muted:  #6B7280;
+      --accent: #1A1D24;
+    }
 
-  body {
-    background: var(--bg);
-    color: var(--white);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
+    html { scroll-behavior: smooth; }
 
-  /* ── GRID BACKGROUND ── */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
-    background-size: 40px 40px;
-    pointer-events: none;
-    z-index: 0;
-  }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
 
-  /* ── NAV ── */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 18px 48px;
-    background: rgba(8,10,12,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-  }
-  .nav-logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 22px;
-    letter-spacing: 3px;
-    color: var(--gold);
-  }
-  .nav-links { display: flex; gap: 32px; }
-  .nav-links a {
-    color: var(--muted);
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--gold); }
-  .nav-cta {
-    background: var(--gold);
-    color: #080A0C !important;
-    padding: 8px 20px;
-    border-radius: 2px;
-    font-weight: 600 !important;
-    font-size: 12px !important;
-  }
-  .nav-cta:hover { background: var(--gold2) !important; color: #000 !important; }
+    img { display: block; width: 100%; height: auto; }
+    a  { color: inherit; text-decoration: none; }
 
-  /* ── HERO ── */
-  #hero {
-    position: relative;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 120px 48px 80px;
-    z-index: 1;
-    overflow: hidden;
-  }
-  .hero-tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    color: var(--gold);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 20px;
-    opacity: 0;
-    animation: fadeUp 0.6s 0.2s forwards;
-  }
-  .hero-name {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(64px, 10vw, 120px);
-    line-height: 0.9;
-    letter-spacing: 4px;
-    color: var(--white);
-    opacity: 0;
-    animation: fadeUp 0.6s 0.4s forwards;
-  }
-  .hero-name span { color: var(--gold); }
-  .hero-sub {
-    margin-top: 24px;
-    font-size: 17px;
-    color: var(--muted);
-    max-width: 520px;
-    font-weight: 300;
-    line-height: 1.7;
-    opacity: 0;
-    animation: fadeUp 0.6s 0.6s forwards;
-  }
-  .hero-stats {
-    display: flex;
-    gap: 48px;
-    margin-top: 56px;
-    opacity: 0;
-    animation: fadeUp 0.6s 0.8s forwards;
-    flex-wrap: wrap;
-  }
-  .stat-item { display: flex; flex-direction: column; gap: 4px; }
-  .stat-num {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 42px;
-    color: var(--gold);
-    line-height: 1;
-    letter-spacing: 2px;
-  }
-  .stat-label {
-    font-size: 11px;
-    color: var(--muted);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    font-weight: 500;
-  }
-  .stat-divider {
-    width: 1px;
-    background: var(--border);
-    align-self: stretch;
-  }
-  .hero-cta {
-    display: flex;
-    gap: 16px;
-    margin-top: 48px;
-    opacity: 0;
-    animation: fadeUp 0.6s 1s forwards;
-    flex-wrap: wrap;
-  }
-  .btn-primary {
-    background: var(--gold);
-    color: #080A0C;
-    padding: 14px 32px;
-    font-weight: 700;
-    font-size: 13px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    text-decoration: none;
-    border-radius: 2px;
-    transition: all 0.2s;
-    display: inline-block;
-  }
-  .btn-primary:hover { background: var(--gold2); transform: translateY(-2px); }
-  .btn-outline {
-    border: 1px solid var(--border);
-    color: var(--white);
-    padding: 14px 32px;
-    font-weight: 500;
-    font-size: 13px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    text-decoration: none;
-    border-radius: 2px;
-    transition: all 0.2s;
-    display: inline-block;
-  }
-  .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+    /* ============================================================
+       NAV
+    ============================================================ */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
 
-  /* Diagonal accent line */
-  .hero-accent {
-    position: absolute;
-    right: -100px;
-    top: 50%;
-    transform: translateY(-50%) rotate(-15deg);
-    width: 600px;
-    height: 600px;
-    border: 1px solid rgba(201,168,76,0.06);
-    border-radius: 50%;
-    pointer-events: none;
-  }
-  .hero-accent2 {
-    position: absolute;
-    right: -60px;
-    top: 50%;
-    transform: translateY(-50%) rotate(-15deg);
-    width: 420px;
-    height: 420px;
-    border: 1px solid rgba(201,168,76,0.08);
-    border-radius: 50%;
-    pointer-events: none;
-  }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.12em;
+      color: var(--gold);
+    }
 
-  /* ── SECTION BASE ── */
-  section {
-    position: relative;
-    z-index: 1;
-    padding: 96px 48px;
-  }
-  .section-tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--gold);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-  }
-  .section-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(36px, 5vw, 56px);
-    letter-spacing: 3px;
-    color: var(--white);
-    margin-bottom: 48px;
-    line-height: 1;
-  }
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
 
-  /* ── ABOUT ── */
-  #about { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 64px;
-    align-items: start;
-  }
-  .about-text { font-size: 15px; color: var(--muted); line-height: 1.9; }
-  .about-text p { margin-bottom: 16px; }
-  .about-text strong { color: var(--white); font-weight: 600; }
-  .about-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
-  .pill {
-    border: 1px solid var(--border);
-    color: var(--muted);
-    font-size: 11px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    padding: 6px 14px;
-    border-radius: 2px;
-    font-weight: 500;
-  }
-  .pill.gold { border-color: var(--gold); color: var(--gold); }
-  .markets-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .market-card {
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    padding: 20px;
-    border-radius: 4px;
-    transition: border-color 0.2s;
-  }
-  .market-card:hover { border-color: var(--gold); }
-  .market-icon { font-size: 22px; margin-bottom: 8px; }
-  .market-name { font-size: 13px; font-weight: 600; color: var(--white); margin-bottom: 4px; }
-  .market-desc { font-size: 12px; color: var(--muted); }
+    .nav-links a {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
 
-  /* ── PERFORMANCE ── */
-  #performance { background: var(--bg); }
-  .perf-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 40px; }
-  .perf-card {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    padding: 28px 24px;
-    border-radius: 4px;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.2s, border-color 0.2s;
-  }
-  .perf-card:hover { transform: translateY(-4px); border-color: var(--gold); }
-  .perf-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: var(--gold);
-  }
-  .perf-card.green::before { background: var(--green); }
-  .perf-card-label { font-size: 11px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; font-weight: 500; }
-  .perf-card-value {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 38px;
-    color: var(--gold);
-    letter-spacing: 2px;
-    line-height: 1;
-    margin-bottom: 8px;
-  }
-  .perf-card.green .perf-card-value { color: var(--green); }
-  .perf-card-sub { font-size: 12px; color: var(--muted); }
-  .perf-highlight {
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-left: 3px solid var(--gold);
-    padding: 24px 28px;
-    border-radius: 4px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 24px;
-  }
-  .ph-item {}
-  .ph-label { font-size: 11px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
-  .ph-val { font-family: 'DM Mono', monospace; font-size: 15px; color: var(--white); font-weight: 500; }
-  .ph-val.up { color: var(--green); }
-  .ph-val.gold { color: var(--gold); }
+    /* Hide nav links on very small screens, show hamburger alternative */
+    @media (max-width: 480px) {
+      .nav-links { display: none; }
+    }
 
-  /* ── CERTIFICATIONS ── */
-  #certifications { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-  .cert-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-  .cert-card {
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    padding: 32px 24px;
-    border-radius: 4px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s;
-    cursor: pointer;
-  }
-  .cert-card:hover { border-color: var(--gold); transform: translateY(-4px); }
-  .cert-card::after {
-    content: 'VERIFIED ✓';
-    position: absolute;
-    top: 14px; right: -28px;
-    background: var(--green);
-    color: white;
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    padding: 4px 40px;
-    transform: rotate(45deg);
-  }
-  .cert-firm {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 28px;
-    letter-spacing: 3px;
-    color: var(--gold);
-    margin-bottom: 8px;
-  }
-  .cert-level {
-    font-size: 12px;
-    color: var(--white);
-    font-weight: 600;
-    margin-bottom: 6px;
-    letter-spacing: 1px;
-  }
-  .cert-date { font-size: 11px; color: var(--muted); font-family: 'DM Mono', monospace; }
-  .cert-badge {
-    width: 56px; height: 56px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 24px;
-    margin: 0 auto 20px;
-  }
-  .cert-badge.gold-bg { background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.3); }
-  .cert-placeholder {
-    margin-top: 20px;
-    border: 1px dashed var(--border);
-    padding: 12px;
-    border-radius: 4px;
-    font-size: 11px;
-    color: var(--muted);
-    letter-spacing: 1px;
-  }
+    /* ============================================================
+       HERO
+    ============================================================ */
+    .hero {
+      padding: 4rem 1.25rem 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
 
-  /* ── STRATEGY ── */
-  #strategy { background: var(--bg); }
-  .strategy-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; align-items: start; }
-  .strategy-steps { display: flex; flex-direction: column; gap: 0; }
-  .step {
-    display: flex;
-    gap: 20px;
-    padding: 20px 0;
-    border-bottom: 1px solid var(--border);
-    transition: background 0.2s;
-  }
-  .step:last-child { border-bottom: none; }
-  .step-num {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 32px;
-    color: var(--border);
-    line-height: 1;
-    min-width: 40px;
-    transition: color 0.2s;
-  }
-  .step:hover .step-num { color: var(--gold); }
-  .step-content {}
-  .step-title { font-size: 14px; font-weight: 600; color: var(--white); margin-bottom: 4px; }
-  .step-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
-  .strategy-note {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-left: 3px solid var(--gold);
-    padding: 20px 24px;
-    border-radius: 4px;
-    font-size: 13px;
-    color: var(--muted);
-    line-height: 1.8;
-    font-style: italic;
-  }
-  .strategy-side {}
-  .side-box {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    padding: 24px;
-    border-radius: 4px;
-    margin-bottom: 16px;
-  }
-  .side-box-title { font-size: 11px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; font-weight: 600; }
-  .tframe-list { display: flex; flex-direction: column; gap: 10px; }
-  .tframe {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 14px;
-    background: var(--bg3);
-    border-radius: 3px;
-    font-size: 13px;
-  }
-  .tframe-name { color: var(--white); font-weight: 500; }
-  .tframe-role { color: var(--muted); font-size: 11px; font-family: 'DM Mono', monospace; }
-  .pair-chips { display: flex; flex-wrap: wrap; gap: 8px; }
-  .chip {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    color: var(--white);
-    padding: 5px 10px;
-    border-radius: 2px;
-    font-weight: 500;
-  }
-  .chip.active { border-color: var(--gold); color: var(--gold); }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(201,168,76,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
 
-  /* ── EXPERIENCE ── */
-  #experience { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-  .exp-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-  .exp-card {
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    padding: 28px 20px;
-    border-radius: 4px;
-    text-align: center;
-    transition: all 0.2s;
-  }
-  .exp-card:hover { border-color: var(--gold); transform: translateY(-3px); }
-  .exp-icon { font-size: 28px; margin-bottom: 14px; }
-  .exp-num {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 34px;
-    color: var(--gold);
-    letter-spacing: 2px;
-    line-height: 1;
-    margin-bottom: 6px;
-  }
-  .exp-label { font-size: 11px; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; font-weight: 500; }
+    .hero-eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      color: var(--green);
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
 
-  /* ── CHART SAMPLES PLACEHOLDER ── */
-  #charts { background: var(--bg); }
-  .charts-note {
-    background: var(--bg2);
-    border: 1px dashed var(--border);
-    border-radius: 4px;
-    padding: 48px;
-    text-align: center;
-    color: var(--muted);
-    font-size: 14px;
-    line-height: 1.8;
-  }
-  .charts-placeholder-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
-  .chart-placeholder {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    height: 200px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    color: var(--muted);
-    font-size: 12px;
-    letter-spacing: 1px;
-    transition: border-color 0.2s;
-    cursor: pointer;
-  }
-  .chart-placeholder:hover { border-color: var(--gold); }
-  .chart-placeholder-icon { font-size: 28px; opacity: 0.4; }
-  .add-text { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 2px; }
+    .hero-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.5rem, 16vw, 7rem);
+      letter-spacing: 0.08em;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
 
-  /* ── CONTACT ── */
-  #contact { background: var(--bg2); border-top: 1px solid var(--border); }
-  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
-  .contact-text { font-size: 15px; color: var(--muted); line-height: 1.9; }
-  .contact-text p { margin-bottom: 12px; }
-  .contact-items { display: flex; flex-direction: column; gap: 16px; }
-  .contact-item {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 16px 20px;
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    text-decoration: none;
-    transition: border-color 0.2s;
-  }
-  .contact-item:hover { border-color: var(--gold); }
-  .contact-item-icon { font-size: 20px; }
-  .contact-item-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 2px; }
-  .contact-item-val { font-size: 14px; color: var(--white); font-weight: 500; font-family: 'DM Mono', monospace; }
+    .hero-title {
+      font-size: clamp(0.8rem, 3vw, 1rem);
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
 
-  /* ── FOOTER ── */
-  footer {
-    background: var(--bg);
-    border-top: 1px solid var(--border);
-    padding: 28px 48px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 1;
-    position: relative;
-  }
-  .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 3px; color: var(--gold); }
-  .footer-copy { font-size: 12px; color: var(--muted); font-family: 'DM Mono', monospace; }
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+    }
 
-  /* ── DIVIDER LINE ── */
-  .gold-line {
-    width: 48px; height: 2px;
-    background: var(--gold);
-    margin-bottom: 20px;
-  }
+    .tag {
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.85rem;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      color: var(--muted);
+    }
 
-  /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
+    /* ============================================================
+       SECTION WRAPPER
+    ============================================================ */
+    section { padding: 3rem 1.25rem; }
 
-  .reveal {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s, transform 0.6s;
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: none;
-  }
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
 
-  /* ── SCROLLBAR ── */
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: var(--bg); }
-  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-  ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(1.8rem, 7vw, 2.8rem);
+      letter-spacing: 0.06em;
+      color: var(--text);
+      margin-bottom: 2rem;
+    }
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 900px) {
-    nav { padding: 16px 24px; }
-    .nav-links { display: none; }
-    section { padding: 64px 24px; }
-    #hero { padding: 100px 24px 64px; }
-    footer { padding: 20px 24px; flex-direction: column; gap: 12px; text-align: center; }
-    .about-grid, .strategy-grid, .contact-grid { grid-template-columns: 1fr; gap: 32px; }
-    .perf-grid, .cert-grid, .exp-grid { grid-template-columns: 1fr 1fr; }
-    .perf-highlight { grid-template-columns: 1fr; }
-    .charts-placeholder-grid { grid-template-columns: 1fr; }
-    .hero-stats { gap: 28px; }
-    .stat-divider { display: none; }
-  }
-</style>
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 0 1.25rem;
+    }
+
+    /* ============================================================
+       STATS GRID
+    ============================================================ */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+
+    .stat-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.75rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card.highlight { border-color: var(--gold); }
+    .stat-card.highlight::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--gold);
+    }
+
+    .stat-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-value {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 8vw, 3rem);
+      letter-spacing: 0.04em;
+      color: var(--green);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-value.gold { color: var(--gold); }
+
+    .stat-desc {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ============================================================
+       STRATEGY BOX
+    ============================================================ */
+    .strategy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .strategy-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.25rem;
+    }
+
+    .strategy-item .s-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.3rem;
+    }
+
+    .strategy-item .s-value {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.05em;
+      color: var(--gold);
+    }
+
+    /* ============================================================
+       CERTIFICATIONS
+    ============================================================ */
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+
+    .cert-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .cert-badge {
+      position: absolute;
+      top: 0; right: 0;
+      background: var(--green);
+      color: #fff;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 8px 100%);
+    }
+
+    .cert-body {
+      padding: 1.5rem;
+    }
+
+    .cert-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .cert-firm {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      margin-bottom: 0.25rem;
+    }
+
+    .cert-phase {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+    }
+
+    .cert-date {
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .cert-img-wrap {
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .cert-img-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    /* placeholder when image not uploaded yet */
+    .cert-placeholder {
+      background: var(--accent);
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ============================================================
+       CHARTS GRID
+    ============================================================ */
+    .charts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+
+    .chart-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .chart-card img,
+    .chart-card .chart-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+    }
+
+    .chart-placeholder {
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+    }
+
+    .chart-info {
+      padding: 1rem;
+    }
+
+    .chart-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 0.2rem;
+    }
+
+    .chart-meta {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ============================================================
+       JOURNAL GRID
+    ============================================================ */
+    .journal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+
+    .journal-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .journal-card img,
+    .journal-card .journal-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+    }
+
+    .journal-placeholder {
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+    }
+
+    .journal-info {
+      padding: 1rem;
+    }
+
+    .journal-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+
+    /* ============================================================
+       CONTACT FORM
+    ============================================================ */
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    @media (min-width: 700px) {
+      .contact-wrap { grid-template-columns: 1fr 1fr; }
+    }
+
+    .contact-info p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 1.25rem;
+    }
+
+    .contact-email {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      padding: 0.55rem 1rem;
+      border-radius: 3px;
+      transition: background 0.2s;
+    }
+    .contact-email:hover { background: rgba(201,168,76,0.1); }
+
+    .form-group { margin-bottom: 1rem; }
+
+    .form-group label {
+      display: block;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.35rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      padding: 0.65rem 0.85rem;
+      outline: none;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--gold);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 100px; }
+
+    .form-group select option { background: #111; }
+
+    .btn-submit {
+      width: 100%;
+      background: var(--gold);
+      color: #0A0A0A;
+      border: none;
+      border-radius: 3px;
+      padding: 0.85rem;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.15em;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .btn-submit:hover { opacity: 0.88; }
+
+    .form-success {
+      display: none;
+      background: rgba(39,174,96,0.12);
+      border: 1px solid var(--green);
+      border-radius: 4px;
+      padding: 1rem;
+      text-align: center;
+      color: var(--green);
+      font-size: 0.9rem;
+      margin-top: 1rem;
+    }
+
+    /* ============================================================
+       WHATSAPP FLOATING BUTTON
+    ============================================================ */
+    .wa-float {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.25rem;
+      z-index: 999;
+      background: #25D366;
+      border-radius: 50%;
+      width: 58px;
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+    }
+    .wa-float:hover {
+      transform: scale(1.08);
+      box-shadow: 0 6px 28px rgba(37,211,102,0.55);
+    }
+
+    .wa-float svg { width: 30px; height: 30px; fill: #fff; }
+
+    .wa-tooltip {
+      position: fixed;
+      bottom: 5.5rem;
+      right: 1.25rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      font-size: 0.78rem;
+      color: var(--text);
+      max-width: 200px;
+      text-align: center;
+      z-index: 998;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(6px);
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .wa-float:hover + .wa-tooltip,
+    .wa-tooltip:hover {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 1.25rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+    }
+
+    footer span { color: var(--gold); }
+
+    /* ============================================================
+       RESPONSIVE TWEAKS
+    ============================================================ */
+    @media (max-width: 400px) {
+      section { padding: 2.5rem 1rem; }
+      .divider { margin: 0 1rem; }
+    }
+  </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-logo">ABHAY</div>
-  <div class="nav-links">
-    <a href="#about">About</a>
-    <a href="#performance">Performance</a>
-    <a href="#certifications">Certifications</a>
-    <a href="#strategy">Strategy</a>
-    <a href="#charts">Analysis</a>
-    <a href="#journal">Journal</a>
-    <a href="#contact" class="nav-cta">Contact</a>
-  </div>
-</nav>
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">ABHAY</div>
+    <ul class="nav-links">
+      <li><a href="#stats">Stats</a></li>
+      <li><a href="#certs">Certs</a></li>
+      <li><a href="#charts">Charts</a></li>
+      <li><a href="#journal">Journal</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
 
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-accent"></div>
-  <div class="hero-accent2"></div>
-  <div class="hero-tag">// Forex Trader — Professional Portfolio</div>
-  <div class="hero-name">ABHAY<br/><span>TRADES.</span></div>
-  <p class="hero-sub">
-    Independent forex trader with 3 years of execution across forex, crypto, derivatives, and commodities. Prop firm certified. Data-driven. Consistent.
-  </p>
-  <div class="hero-stats">
-    <div class="stat-item">
-      <div class="stat-num">3+</div>
-      <div class="stat-label">Years Trading</div>
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-eyebrow">// Forex Trader &amp; Market Analyst</p>
+    <h1 class="hero-name">ABHAY</h1>
+    <p class="hero-title">NY Domination Strategy &nbsp;·&nbsp; Prop Funded &nbsp;·&nbsp; 3 Years Experience</p>
+    <div class="hero-tags">
+      <span class="tag">Forex</span>
+      <span class="tag">Crypto</span>
+      <span class="tag">Commodities</span>
+      <span class="tag">Derivatives</span>
+      <span class="tag">NISM Series 8</span>
+      <span class="tag">NISM XV (In Progress)</span>
     </div>
-    <div class="stat-divider"></div>
-    <div class="stat-item">
-      <div class="stat-num">900%</div>
-      <div class="stat-label">Exness Growth</div>
-    </div>
-    <div class="stat-divider"></div>
-    <div class="stat-item">
-      <div class="stat-num">100+</div>
-      <div class="stat-label">Backtests Done</div>
-    </div>
-    <div class="stat-divider"></div>
-    <div class="stat-item">
-      <div class="stat-num">3</div>
-      <div class="stat-label">Prop Firm Passes</div>
-    </div>
-  </div>
-  <div class="hero-cta">
-    <a href="#performance" class="btn-primary">View Performance</a>
-    <a href="#certifications" class="btn-outline">Certifications</a>
-  </div>
-</section>
+  </section>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="reveal">
-    <div class="section-tag">// 01 — About</div>
-    <div class="section-title">WHO I AM</div>
-  </div>
-  <div class="about-grid reveal">
-    <div>
-      <div class="about-text">
-        <p>I am an independent professional forex trader based in India, operating with a fully systematic, rule-based approach to the markets. My trading is driven by <strong>price action, market structure, and strict risk management</strong> — not indicators, not emotion.</p>
-        <p>Over 3 years I have built, tested, and refined a proprietary trend-following strategy called the <strong>NY Domination Strategy</strong> — backtested over 100 times, forward tested, and live executed with real capital and prop firm accounts.</p>
-        <p>I hold <strong>NISM Series 8</strong> certification and am currently preparing for <strong>NISM Series XV (Research Analyst)</strong>. My long-term goal is to manage a $15M funded account and launch a hedge fund.</p>
-      </div>
-      <div class="about-pills">
-        <span class="pill gold">NISM Series 8 Certified</span>
-        <span class="pill gold">NISM XV In Progress</span>
-        <span class="pill">Prop Firm Funded</span>
-        <span class="pill">Risk Management</span>
-        <span class="pill">Price Action</span>
-        <span class="pill">Market Structure</span>
-      </div>
-    </div>
-    <div class="markets-grid">
-      <div class="market-card">
-        <div class="market-icon">💱</div>
-        <div class="market-name">Forex</div>
-        <div class="market-desc">Major, minor & exotic pairs. NY session specialist.</div>
-      </div>
-      <div class="market-card">
-        <div class="market-icon">₿</div>
-        <div class="market-name">Crypto</div>
-        <div class="market-desc">BTC, ETH & altcoin structure trading.</div>
-      </div>
-      <div class="market-card">
-        <div class="market-icon">📊</div>
-        <div class="market-name">Derivatives</div>
-        <div class="market-desc">1 year Indian derivatives market experience.</div>
-      </div>
-      <div class="market-card">
-        <div class="market-icon">🥇</div>
-        <div class="market-name">Commodities</div>
-        <div class="market-desc">Gold (XAUUSD) & oil structure plays.</div>
-      </div>
-    </div>
-  </div>
-</section>
+  <div class="divider"></div>
 
-<!-- PERFORMANCE -->
-<section id="performance">
-  <div class="reveal">
-    <div class="section-tag">// 02 — Performance</div>
-    <div class="section-title">TRADING RESULTS</div>
-  </div>
-  <div class="perf-grid reveal">
-    <div class="perf-card green">
-      <div class="perf-card-label">Exness Account Growth</div>
-      <div class="perf-card-value">$5K→$50K</div>
-      <div class="perf-card-sub">900% return in 2 months with proper risk management</div>
-    </div>
-    <div class="perf-card">
-      <div class="perf-card-label">Backtests Completed</div>
-      <div class="perf-card-value">100+</div>
-      <div class="perf-card-sub">Historical data validation across multiple pairs & sessions</div>
-    </div>
-    <div class="perf-card">
-      <div class="perf-card-label">Live Executions</div>
-      <div class="perf-card-value">100+</div>
-      <div class="perf-card-sub">Forward tested & live market executions logged</div>
-    </div>
-  </div>
-  <div class="perf-highlight reveal">
-    <div class="ph-item">
-      <div class="ph-label">Risk Per Trade</div>
-      <div class="ph-val gold">1–2% Max</div>
-    </div>
-    <div class="ph-item">
-      <div class="ph-label">Primary Session</div>
-      <div class="ph-val">New York Session</div>
-    </div>
-    <div class="ph-item">
-      <div class="ph-label">Journal Maintained</div>
-      <div class="ph-val up">✓ Yes — Every Trade</div>
-    </div>
-  </div>
-</section>
+  <!-- STATS -->
+  <section id="stats">
+    <p class="section-label">// 01 — Performance</p>
+    <h2 class="section-title">KEY METRICS</h2>
 
-<!-- CERTIFICATIONS -->
-<section id="certifications">
-  <div class="reveal">
-    <div class="section-tag">// 03 — Certifications</div>
-    <div class="section-title">PROP FIRM PASSES</div>
-  </div>
-  <div class="cert-grid reveal">
-    <div class="cert-card">
-      <div class="cert-badge gold-bg">🏆</div>
-      <div class="cert-firm">FTMO</div>
-      <div class="cert-level">Full Evaluation — Challenge + Verification</div>
-      <div class="cert-date">PASSED — April 27, 2026</div>
-      <div class="cert-img-wrap" style="margin-top:12px;">
-        <img src="https://raw.githubusercontent.com/abhaytrades/abhaytrades.github.io/main/ftmo-cert.jpg" 
-             onerror="this.parentElement.innerHTML='<div style=\'border:1px dashed #1E2530;padding:12px;border-radius:4px;font-size:11px;color:#7A8494;letter-spacing:1px;\'>📄 Upload <b>FTMO</b> as <b>ftmo-cert.jpg</b> to GitHub</div>'"
-             style="width:100%;border-radius:4px;margin-top:12px;border:1px solid var(--border);object-fit:cover;" alt="FTMO Certificate"/>
+    <div class="stats-grid">
+      <div class="stat-card highlight">
+        <p class="stat-label">Exness Account Growth</p>
+        <p class="stat-value">$5K → $50K</p>
+        <p class="stat-desc">900% return in 2 months with proper risk management</p>
       </div>
-    </div>
-    <div class="cert-card">
-      <div class="cert-badge gold-bg">⚡</div>
-      <div class="cert-firm">Funded Firm</div>
-      <div class="cert-level">Phase 1 — Passed</div>
-      <div class="cert-date">PASSED — December 12, 2025</div>
-      <div class="cert-img-wrap" style="margin-top:12px;">
-        <img src="https://raw.githubusercontent.com/abhaytrades/abhaytrades.github.io/main/fundedfirm-cert.jpg" 
-             onerror="this.parentElement.innerHTML='<div style=\'border:1px dashed #1E2530;padding:12px;border-radius:4px;font-size:11px;color:#7A8494;letter-spacing:1px;\'>📄 Upload <b>FundedFirm</b> as <b>fundedfirm-cert.jpg</b> to GitHub</div>'"
-             style="width:100%;border-radius:4px;margin-top:12px;border:1px solid var(--border);object-fit:cover;" alt="FundedFirm Certificate"/>
-      </div>
-    </div>
-    <div class="cert-card">
-      <div class="cert-badge gold-bg">🎯</div>
-      <div class="cert-firm">FundedSkill</div>
-      <div class="cert-level">Phase 1 — Passed</div>
-      <div class="cert-date">PASSED — October 6, 2025</div>
-      <div class="cert-img-wrap" style="margin-top:12px;">
-        <img src="https://raw.githubusercontent.com/abhaytrades/abhaytrades.github.io/main/fundedskill-cert.jpg" 
-             onerror="this.parentElement.innerHTML='<div style=\'border:1px dashed #1E2530;padding:12px;border-radius:4px;font-size:11px;color:#7A8494;letter-spacing:1px;\'>📄 Upload <b>FundedSkill</b> as <b>fundedskill-cert.jpg</b> to GitHub</div>'"
-             style="width:100%;border-radius:4px;margin-top:12px;border:1px solid var(--border);object-fit:cover;" alt="FundedSkill Certificate"/>
-      </div>
-    </div>
-  </div>
-  <div style="margin-top:20px;" class="reveal">
-    <div class="strategy-note">
-      All certifications passed using the NY Domination Strategy — the same systematic, rule-based approach applied across every prop firm evaluation without deviation.
-    </div>
-  </div>
-</section>
 
-<!-- STRATEGY -->
-<section id="strategy">
-  <div class="reveal">
-    <div class="section-tag">// 04 — Strategy</div>
-    <div class="section-title">NY DOMINATION STRATEGY</div>
-  </div>
-  <div class="strategy-grid">
-    <div class="reveal">
-      <div class="strategy-note" style="margin-bottom:32px;">
-        A fully rule-based, trend-following strategy built for the New York session. Every entry follows a defined set of conditions — no discretion, no guessing. The system has been validated through 100+ backtests and 100+ live executions.
+      <div class="stat-card">
+        <p class="stat-label">Backtests Completed</p>
+        <p class="stat-value gold">100+</p>
+        <p class="stat-desc">Historical data validation across multiple pairs &amp; sessions</p>
       </div>
-      <div class="strategy-steps">
-        <div class="step">
-          <div class="step-num">01</div>
-          <div class="step-content">
-            <div class="step-title">Trend Identification</div>
-            <div class="step-desc">Higher timeframe trend direction is established first. Only trade in the direction of the dominant trend — no counter-trend entries.</div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">02</div>
-          <div class="step-content">
-            <div class="step-title">Retracement Zone (Min 50%)</div>
-            <div class="step-desc">Wait for price to retrace minimum 50% of the last impulse move. This defines the entry zone — no chasing breakouts.</div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">03</div>
-          <div class="step-content">
-            <div class="step-title">Execution Trigger</div>
-            <div class="step-desc">Entry via (A) market structure shift in trend direction, or (B) failed retracement confirmed by double top / double bottom pattern.</div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">04</div>
-          <div class="step-content">
-            <div class="step-title">Confirmation (1m / 5m MSS)</div>
-            <div class="step-desc">Lower timeframe (1m or 5m) market structure shift confirms entry. Reduces false entries significantly.</div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">05</div>
-          <div class="step-content">
-            <div class="step-title">Risk Management</div>
-            <div class="step-desc">Stop loss placed at lower timeframe high/low post-shift. Target at execution timeframe swing high/low. Fixed 1–2% risk per trade.</div>
+
+      <div class="stat-card">
+        <p class="stat-label">Live Executions</p>
+        <p class="stat-value gold">100+</p>
+        <p class="stat-desc">Forward tested &amp; live market executions logged</p>
+      </div>
+
+      <div class="stat-card">
+        <p class="stat-label">Total Experience</p>
+        <p class="stat-value gold">3 YRS</p>
+        <p class="stat-desc">Forex, crypto, commodity &amp; 1 yr Indian derivatives</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- STRATEGY -->
+  <section id="strategy">
+    <p class="section-label">// 02 — System Rules</p>
+    <h2 class="section-title">NY DOMINATION STRATEGY</h2>
+
+    <div class="strategy-grid">
+      <div class="strategy-item">
+        <p class="s-label">Risk Per Trade</p>
+        <p class="s-value">1–2% MAX</p>
+      </div>
+      <div class="strategy-item">
+        <p class="s-label">Primary Session</p>
+        <p class="s-value">NEW YORK</p>
+      </div>
+      <div class="strategy-item">
+        <p class="s-label">Bias</p>
+        <p class="s-value">TREND-FOLLOW</p>
+      </div>
+      <div class="strategy-item">
+        <p class="s-label">Min Retracement</p>
+        <p class="s-value">50%+</p>
+      </div>
+      <div class="strategy-item">
+        <p class="s-label">Confirmation TF</p>
+        <p class="s-value">1M / 5M MSS</p>
+      </div>
+      <div class="strategy-item">
+        <p class="s-label">Entry Type</p>
+        <p class="s-value">A / B SETUP</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CERTIFICATIONS -->
+  <section id="certs">
+    <p class="section-label">// 03 — Verified Credentials</p>
+    <h2 class="section-title">CERTIFICATIONS</h2>
+
+    <div class="cert-grid">
+
+      <!-- FTMO -->
+      <div class="cert-card">
+        <div class="cert-badge">✓ VERIFIED</div>
+        <div class="cert-body">
+          <div class="cert-icon">🏆</div>
+          <p class="cert-firm">FTMO</p>
+          <p class="cert-phase">Full Evaluation — Challenge + Verification</p>
+          <p class="cert-date">PASSED — April 27, 2026</p>
+          <div class="cert-img-wrap">
+            <!-- Upload ftmo-cert.jpg to repo — it will appear automatically -->
+            <img src="ftmo-cert.jpg" alt="FTMO Certificate"
+                 onerror="this.parentNode.innerHTML='<div class=\'cert-placeholder\'>Upload ftmo-cert.jpg</div>'" />
           </div>
         </div>
       </div>
-    </div>
-    <div class="strategy-side reveal">
-      <div class="side-box">
-        <div class="side-box-title">Timeframe Stack</div>
-        <div class="tframe-list">
-          <div class="tframe">
-            <span class="tframe-name">Daily / 4H</span>
-            <span class="tframe-role">Trend Direction</span>
-          </div>
-          <div class="tframe">
-            <span class="tframe-name">1H / 15M</span>
-            <span class="tframe-role">Retracement Zone</span>
-          </div>
-          <div class="tframe">
-            <span class="tframe-name">5M / 1M</span>
-            <span class="tframe-role">Entry Confirmation</span>
+
+      <!-- Funded Firm -->
+      <div class="cert-card">
+        <div class="cert-badge">✓ VERIFIED</div>
+        <div class="cert-body">
+          <div class="cert-icon">⚡</div>
+          <p class="cert-firm">FUNDED FIRM</p>
+          <p class="cert-phase">Phase 1 — Passed</p>
+          <p class="cert-date">PASSED — December 12, 2025</p>
+          <div class="cert-img-wrap">
+            <img src="fundedfirm-cert.jpg" alt="Funded Firm Certificate"
+                 onerror="this.parentNode.innerHTML='<div class=\'cert-placeholder\'>Upload fundedfirm-cert.jpg</div>'" />
           </div>
         </div>
       </div>
-      <div class="side-box">
-        <div class="side-box-title">Primary Pairs Traded</div>
-        <div class="pair-chips">
-          <span class="chip active">XAUUSD</span>
-          <span class="chip active">GBPUSD</span>
-          <span class="chip active">EURUSD</span>
-          <span class="chip">USDJPY</span>
-          <span class="chip">GBPJPY</span>
-          <span class="chip">AUDUSD</span>
-          <span class="chip">USDCAD</span>
-          <span class="chip">NZDUSD</span>
-        </div>
-      </div>
-      <div class="side-box">
-        <div class="side-box-title">Session Focus</div>
-        <div class="tframe-list">
-          <div class="tframe">
-            <span class="tframe-name">New York Open</span>
-            <span class="tframe-role" style="color:var(--gold);">PRIMARY</span>
-          </div>
-          <div class="tframe">
-            <span class="tframe-name">London-NY Overlap</span>
-            <span class="tframe-role">SECONDARY</span>
+
+      <!-- FundedSkill -->
+      <div class="cert-card">
+        <div class="cert-badge">✓ VERIFIED</div>
+        <div class="cert-body">
+          <div class="cert-icon">🎯</div>
+          <p class="cert-firm">FUNDEDSKILL</p>
+          <p class="cert-phase">Phase 1 — Passed</p>
+          <p class="cert-date">PASSED — October 6, 2025</p>
+          <div class="cert-img-wrap">
+            <img src="fundedskill-cert.jpg" alt="FundedSkill Certificate"
+                 onerror="this.parentNode.innerHTML='<div class=\'cert-placeholder\'>Upload fundedskill-cert.jpg</div>'" />
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
 
-<!-- EXPERIENCE -->
-<section id="experience">
-  <div class="reveal">
-    <div class="section-tag">// 05 — Experience</div>
-    <div class="section-title">BY THE NUMBERS</div>
-  </div>
-  <div class="exp-grid reveal">
-    <div class="exp-card">
-      <div class="exp-icon">📅</div>
-      <div class="exp-num">3</div>
-      <div class="exp-label">Years Trading</div>
-    </div>
-    <div class="exp-card">
-      <div class="exp-icon">🔬</div>
-      <div class="exp-num">100+</div>
-      <div class="exp-label">Backtests</div>
-    </div>
-    <div class="exp-card">
-      <div class="exp-icon">⚡</div>
-      <div class="exp-num">100+</div>
-      <div class="exp-label">Forward Tests</div>
-    </div>
-    <div class="exp-card">
-      <div class="exp-icon">💹</div>
-      <div class="exp-num">100+</div>
-      <div class="exp-label">Live Executions</div>
-    </div>
-    <div class="exp-card">
-      <div class="exp-icon">🏢</div>
-      <div class="exp-num">3</div>
-      <div class="exp-label">Prop Firms Passed</div>
-    </div>
-    <div class="exp-card">
-      <div class="exp-icon">📋</div>
-      <div class="exp-num">4</div>
-      <div class="exp-label">Markets Traded</div>
-    </div>
-    <div class="exp-card">
-      <div class="exp-icon">📓</div>
-      <div class="exp-num">1</div>
-      <div class="exp-label">Journal — Every Trade</div>
-    </div>
-    <div class="exp-card">
-      <div class="exp-icon">🎯</div>
-      <div class="exp-num">$15M</div>
-      <div class="exp-label">Fund Target</div>
-    </div>
-  </div>
-</section>
+      <!-- NISM Series 8 — FIXED: now a full visible card -->
+      <div class="cert-card">
+        <div class="cert-badge">✓ CERTIFIED</div>
+        <div class="cert-body">
+          <div class="cert-icon">📜</div>
+          <p class="cert-firm">NISM</p>
+          <p class="cert-phase">Series 8 — Equity Derivatives</p>
+          <p class="cert-date">CERTIFIED</p>
+          <div class="cert-img-wrap">
+            <img src="nism8-cert.jpg" alt="NISM Series 8 Certificate"
+                 onerror="this.parentNode.innerHTML='<div class=\'cert-placeholder\'>Upload nism8-cert.jpg</div>'" />
+          </div>
+        </div>
+      </div>
 
-<!-- CHART SAMPLES -->
-<section id="charts">
-  <div class="reveal">
-    <div class="section-tag">// 06 — Analysis Samples</div>
-    <div class="section-title">CHART ANALYSES</div>
-  </div>
-<div class="reveal">
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px;">
-      <div class="chart-card" style="background:var(--bg2);border:1px solid var(--border);border-radius:4px;overflow:hidden;transition:all 0.2s;">
-        <img src="https://raw.githubusercontent.com/abhaytrades/abhaytrades.github.io/main/chart1.jpg"
-             onerror="this.parentElement.innerHTML='<div style=\'height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#7A8494;\'>\
-<div style=\'font-size:28px;opacity:0.4;\'>📊</div>\
-<div style=\'font-size:11px;letter-spacing:2px;text-transform:uppercase;\'>Upload as <b>chart1.jpg</b></div>\
-<div style=\'font-size:10px;\'>to your GitHub repository</div></div>'"
-             style="width:100%;height:220px;object-fit:cover;display:block;" alt="Chart 1"/>
-        <div style="padding:12px 14px;border-top:1px solid var(--border);">
-          <div style="font-family:DM Mono,monospace;font-size:11px;color:var(--gold);letter-spacing:1px;">CHART 01</div>
-          <div style="font-size:12px;color:var(--muted);margin-top:2px;">Pair • Date • Long/Short</div>
-        </div>
-      </div>
-      <div class="chart-card" style="background:var(--bg2);border:1px solid var(--border);border-radius:4px;overflow:hidden;transition:all 0.2s;">
-        <img src="https://raw.githubusercontent.com/abhaytrades/abhaytrades.github.io/main/chart2.jpg"
-             onerror="this.parentElement.innerHTML='<div style=\'height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#7A8494;\'>\
-<div style=\'font-size:28px;opacity:0.4;\'>📊</div>\
-<div style=\'font-size:11px;letter-spacing:2px;text-transform:uppercase;\'>Upload as <b>chart2.jpg</b></div>\
-<div style=\'font-size:10px;\'>to your GitHub repository</div></div>'"
-             style="width:100%;height:220px;object-fit:cover;display:block;" alt="Chart 2"/>
-        <div style="padding:12px 14px;border-top:1px solid var(--border);">
-          <div style="font-family:DM Mono,monospace;font-size:11px;color:var(--gold);letter-spacing:1px;">CHART 02</div>
-          <div style="font-size:12px;color:var(--muted);margin-top:2px;">Pair • Date • Long/Short</div>
-        </div>
-      </div>
-      <div class="chart-card" style="background:var(--bg2);border:1px solid var(--border);border-radius:4px;overflow:hidden;transition:all 0.2s;">
-        <img src="https://raw.githubusercontent.com/abhaytrades/abhaytrades.github.io/main/chart3.jpg"
-             onerror="this.parentElement.innerHTML='<div style=\'height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#7A8494;\'>\
-<div style=\'font-size:28px;opacity:0.4;\'>📊</div>\
-<div style=\'font-size:11px;letter-spacing:2px;text-transform:uppercase;\'>Upload as <b>chart3.jpg</b></div>\
-<div style=\'font-size:10px;\'>to your GitHub repository</div></div>'"
-             style="width:100%;height:220px;object-fit:cover;display:block;" alt="Chart 3"/>
-        <div style="padding:12px 14px;border-top:1px solid var(--border);">
-          <div style="font-family:DM Mono,monospace;font-size:11px;color:var(--gold);letter-spacing:1px;">CHART 03</div>
-          <div style="font-size:12px;color:var(--muted);margin-top:2px;">Pair • Date • Long/Short</div>
-        </div>
-      </div>
-      <div class="chart-card" style="background:var(--bg2);border:1px solid var(--border);border-radius:4px;overflow:hidden;transition:all 0.2s;">
-        <img src="https://raw.githubusercontent.com/abhaytrades/abhaytrades.github.io/main/chart4.jpg"
-             onerror="this.parentElement.innerHTML='<div style=\'height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#7A8494;\'>\
-<div style=\'font-size:28px;opacity:0.4;\'>📊</div>\
-<div style=\'font-size:11px;letter-spacing:2px;text-transform:uppercase;\'>Upload as <b>chart4.jpg</b></div>\
-<div style=\'font-size:10px;\'>to your GitHub repository</div></div>'"
-             style="width:100%;height:220px;object-fit:cover;display:block;" alt="Chart 4"/>
-        <div style="padding:12px 14px;border-top:1px solid var(--border);">
-          <div style="font-family:DM Mono,monospace;font-size:11px;color:var(--gold);letter-spacing:1px;">CHART 04</div>
-          <div style="font-size:12px;color:var(--muted);margin-top:2px;">Pair • Date • Long/Short</div>
-        </div>
-      </div>
-      <div class="chart-card" style="background:var(--bg2);border:1px solid var(--border);border-radius:4px;overflow:hidden;transition:all 0.2s;">
-        <img src="https://raw.githubusercontent.com/abhaytrades/abhaytrades.github.io/main/chart5.jpg"
-             onerror="this.parentElement.innerHTML='<div style=\'height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#7A8494;\'>\
-<div style=\'font-size:28px;opacity:0.4;\'>📊</div>\
-<div style=\'font-size:11px;letter-spacing:2px;text-transform:uppercase;\'>Upload as <b>chart5.jpg</b></div>\
-<div style=\'font-size:10px;\'>to your GitHub repository</div></div>'"
-             style="width:100%;height:220px;object-fit:cover;display:block;" alt="Chart 5"/>
-        <div style="padding:12px 14px;border-top:1px solid var(--border);">
-          <div style="font-family:DM Mono,monospace;font-size:11px;color:var(--gold);letter-spacing:1px;">CHART 05</div>
-          <div style="font-size:12px;color:var(--muted);margin-top:2px;">Pair • Date • Long/Short</div>
-        </div>
-      </div>
-      <div class="chart-card" style="background:var(--bg2);border:1px solid var(--border);border-radius:4px;overflow:hidden;transition:all 0.2s;">
-        <img src="https://raw.githubusercontent.com/abhaytrades/abhaytrades.github.io/main/chart6.jpg"
-             onerror="this.parentElement.innerHTML='<div style=\'height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#7A8494;\'>\
-<div style=\'font-size:28px;opacity:0.4;\'>📊</div>\
-<div style=\'font-size:11px;letter-spacing:2px;text-transform:uppercase;\'>Upload as <b>chart6.jpg</b></div>\
-<div style=\'font-size:10px;\'>to your GitHub repository</div></div>'"
-             style="width:100%;height:220px;object-fit:cover;display:block;" alt="Chart 6"/>
-        <div style="padding:12px 14px;border-top:1px solid var(--border);">
-          <div style="font-family:DM Mono,monospace;font-size:11px;color:var(--gold);letter-spacing:1px;">CHART 06</div>
-          <div style="font-size:12px;color:var(--muted);margin-top:2px;">Pair • Date • Long/Short</div>
-        </div>
-      </div>
     </div>
-    <div style="margin-top:16px;background:var(--bg2);border:1px solid var(--border);border-left:3px solid var(--gold);padding:16px 20px;border-radius:4px;">
-      <div style="font-size:11px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;font-weight:600;">HOW TO ADD YOUR CHARTS</div>
-      <div style="font-size:13px;color:var(--muted);line-height:1.8;">
-        Upload your chart screenshots to GitHub repository named exactly: 
-        <span style="font-family:DM Mono,monospace;color:var(--white);">chart1.jpg, chart2.jpg ... chart6.jpg</span><br/>
-        They will appear automatically. Same for certificates: 
-        <span style="font-family:DM Mono,monospace;color:var(--white);">ftmo-cert.jpg, fundedfirm-cert.jpg, fundedskill-cert.jpg</span>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- JOURNAL -->
-<section id="journal" style="background:var(--bg);border-top:1px solid var(--border);">
-  <div class="reveal">
-    <div class="section-tag">// 06b — Trade Journal</div>
-    <div class="section-title">JOURNAL SAMPLES</div>
-  </div>
-  <div class="reveal">
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
-      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:4px;overflow:hidden;">
-        <img src="https://raw.githubusercontent.com/abhaytrades/abhaytrades.github.io/main/journal1.jpg"
-             onerror="this.parentElement.innerHTML='<div style=\'height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#7A8494;\'>\
-<div style=\'font-size:24px;opacity:0.4;\'>📓</div>\
-<div style=\'font-size:11px;letter-spacing:1px;text-transform:uppercase;\'>Upload as journal1.jpg</div></div>'"
-             style="width:100%;height:180px;object-fit:cover;display:block;" alt="Journal 1"/>
-        <div style="padding:10px 14px;border-top:1px solid var(--border);font-size:11px;color:var(--muted);font-family:DM Mono,monospace;letter-spacing:1px;">JOURNAL ENTRY 01</div>
-      </div>
-      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:4px;overflow:hidden;">
-        <img src="https://raw.githubusercontent.com/abhaytrades/abhaytrades.github.io/main/journal2.jpg"
-             onerror="this.parentElement.innerHTML='<div style=\'height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#7A8494;\'>\
-<div style=\'font-size:24px;opacity:0.4;\'>📓</div>\
-<div style=\'font-size:11px;letter-spacing:1px;text-transform:uppercase;\'>Upload as journal2.jpg</div></div>'"
-             style="width:100%;height:180px;object-fit:cover;display:block;" alt="Journal 2"/>
-        <div style="padding:10px 14px;border-top:1px solid var(--border);font-size:11px;color:var(--muted);font-family:DM Mono,monospace;letter-spacing:1px;">JOURNAL ENTRY 02</div>
-      </div>
-      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:4px;overflow:hidden;">
-        <img src="https://raw.githubusercontent.com/abhaytrades/abhaytrades.github.io/main/journal3.jpg"
-             onerror="this.parentElement.innerHTML='<div style=\'height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#7A8494;\'>\
-<div style=\'font-size:24px;opacity:0.4;\'>📓</div>\
-<div style=\'font-size:11px;letter-spacing:1px;text-transform:uppercase;\'>Upload as journal3.jpg</div></div>'"
-             style="width:100%;height:180px;object-fit:cover;display:block;" alt="Journal 3"/>
-        <div style="padding:10px 14px;border-top:1px solid var(--border);font-size:11px;color:var(--muted);font-family:DM Mono,monospace;letter-spacing:1px;">JOURNAL ENTRY 03</div>
-      </div>
-    </div>
-  </div>
-</section>
+  <div class="divider"></div>
 
-<!-- CONTACT -->
-<section id="contact">
-  <div class="reveal">
-    <div class="section-tag">// 07 — Contact</div>
-    <div class="section-title">GET IN TOUCH</div>
-  </div>
-  <div class="contact-grid reveal">
-    <div class="contact-text">
-      <p>I am open to discussions around <strong style="color:var(--white);">prop firm collaborations, funded account opportunities, and serious capital management discussions.</strong></p>
-      <p>All performance data, trade journals, and certification documents are available upon request to verified parties.</p>
-      <p style="color:var(--gold);font-style:italic;">"I don't trade for excitement. I trade for results."</p>
-    </div>
-    <div class="contact-items">
-      <div class="contact-item">
-        <div class="contact-item-icon">📧</div>
-        <div>
-          <div class="contact-item-label">Email</div>
-          <div class="contact-item-val">00abhayyadav11@gmail.com</div>
+  <!-- CHART SCREENSHOTS -->
+  <section id="charts">
+    <p class="section-label">// 04 — Chart Analysis</p>
+    <h2 class="section-title">TRADE SETUPS</h2>
+
+    <div class="charts-grid">
+      <div class="chart-card">
+        <img src="chart1.jpg" alt="Chart 01"
+             onerror="this.outerHTML='<div class=\'chart-placeholder\'>Chart 01 — Upload chart1.jpg</div>'" />
+        <div class="chart-info">
+          <p class="chart-num">// CHART 01</p>
+          <p class="chart-meta">Pair · Date · Long/Short</p>
         </div>
       </div>
-      <div class="contact-item">
-        <div class="contact-item-icon">🌐</div>
-        <div>
-          <div class="contact-item-label">Location</div>
-          <div class="contact-item-val">Indore, India</div>
+
+      <div class="chart-card">
+        <img src="chart2.jpg" alt="Chart 02"
+             onerror="this.outerHTML='<div class=\'chart-placeholder\'>Chart 02 — Upload chart2.jpg</div>'" />
+        <div class="chart-info">
+          <p class="chart-num">// CHART 02</p>
+          <p class="chart-meta">Pair · Date · Long/Short</p>
         </div>
       </div>
-      <div class="contact-item">
-        <div class="contact-item-icon">📄</div>
-        <div>
-          <div class="contact-item-label">Trade Journal</div>
-          <div class="contact-item-val">Available on Request</div>
+
+      <div class="chart-card">
+        <img src="chart3.jpg" alt="Chart 03"
+             onerror="this.outerHTML='<div class=\'chart-placeholder\'>Chart 03 — Upload chart3.jpg</div>'" />
+        <div class="chart-info">
+          <p class="chart-num">// CHART 03</p>
+          <p class="chart-meta">Pair · Date · Long/Short</p>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <img src="chart4.jpg" alt="Chart 04"
+             onerror="this.outerHTML='<div class=\'chart-placeholder\'>Chart 04 — Upload chart4.jpg</div>'" />
+        <div class="chart-info">
+          <p class="chart-num">// CHART 04</p>
+          <p class="chart-meta">Pair · Date · Long/Short</p>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <img src="chart5.jpg" alt="Chart 05"
+             onerror="this.outerHTML='<div class=\'chart-placeholder\'>Chart 05 — Upload chart5.jpg</div>'" />
+        <div class="chart-info">
+          <p class="chart-num">// CHART 05</p>
+          <p class="chart-meta">Pair · Date · Long/Short</p>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <img src="chart6.jpg" alt="Chart 06"
+             onerror="this.outerHTML='<div class=\'chart-placeholder\'>Chart 06 — Upload chart6.jpg</div>'" />
+        <div class="chart-info">
+          <p class="chart-num">// CHART 06</p>
+          <p class="chart-meta">Pair · Date · Long/Short</p>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-logo">ABHAY</div>
-  <div class="footer-copy">© 2026 — Professional Forex Trader — All Rights Reserved</div>
-</footer>
+  <div class="divider"></div>
 
-<script>
-  // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 80);
-      }
+  <!-- TRADE JOURNAL -->
+  <section id="journal">
+    <p class="section-label">// 06B — Trade Journal</p>
+    <h2 class="section-title">JOURNAL SAMPLES</h2>
+
+    <div class="journal-grid">
+      <div class="journal-card">
+        <img src="journal1.jpg" alt="Journal Entry 01"
+             onerror="this.outerHTML='<div class=\'journal-placeholder\'>Journal 01 — Upload journal1.jpg</div>'" />
+        <div class="journal-info">
+          <p class="journal-num">// JOURNAL ENTRY 01</p>
+        </div>
+      </div>
+
+      <div class="journal-card">
+        <img src="journal2.jpg" alt="Journal Entry 02"
+             onerror="this.outerHTML='<div class=\'journal-placeholder\'>Journal 02 — Upload journal2.jpg</div>'" />
+        <div class="journal-info">
+          <p class="journal-num">// JOURNAL ENTRY 02</p>
+        </div>
+      </div>
+
+      <div class="journal-card">
+        <img src="journal3.jpg" alt="Journal Entry 03"
+             onerror="this.outerHTML='<div class=\'journal-placeholder\'>Journal 03 — Upload journal3.jpg</div>'" />
+        <div class="journal-info">
+          <p class="journal-num">// JOURNAL ENTRY 03</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="section-label">// 07 — Contact</p>
+    <h2 class="section-title">GET IN TOUCH</h2>
+
+    <div class="contact-wrap">
+
+      <!-- Left: info -->
+      <div class="contact-info">
+        <p>
+          Whether you want to discuss trading strategy, collaboration, funding opportunities,
+          or just have a genuine question — fill the form or reach me directly.
+        </p>
+        <p>
+          I respond within 24 hours. Serious inquiries only.
+        </p>
+        <a href="mailto:00abhayyadav11.email@gmail.com" class="contact-email">
+          ✉ &nbsp;00abhayyadav11.email@gmail.com
+        </a>
+      </div>
+
+      <!-- Right: form -->
+      <div class="contact-form-wrap">
+        <form id="contactForm">
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Your name" required />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required />
+          </div>
+
+          <div class="form-group">
+            <label for="subject">Reason for Contact</label>
+            <select id="subject" name="subject" required>
+              <option value="" disabled selected>Select a topic</option>
+              <option value="Strategy Query">Trading Strategy Query</option>
+              <option value="Collaboration">Collaboration / Partnership</option>
+              <option value="Funding">Prop Firm / Funding</option>
+              <option value="Mentorship">Mentorship</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Write your message here..." required></textarea>
+          </div>
+
+          <button type="submit" class="btn-submit">SEND MESSAGE</button>
+        </form>
+
+        <div class="form-success" id="formSuccess">
+          ✓ Message sent! I'll get back to you within 24 hours.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- WHATSAPP FLOATING CHAT -->
+  <!--
+    REPLACE +91XXXXXXXXXX with your actual WhatsApp number (with country code, no spaces/dashes).
+    Example for Indian number 9876543210 → +919876543210
+    Set the pre-filled message in the 'text' param below.
+  -->
+  <a class="wa-float"
+     href="https://wa.me/+91XXXXXXXXXX?text=Hi%20Abhay%2C%20I%20found%20your%20trading%20profile%20and%20wanted%20to%20connect."
+     target="_blank"
+     rel="noopener"
+     aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16 1C7.716 1 1 7.716 1 16c0 2.709.707 5.254 1.943 7.463L1 31l7.745-2.031A14.94 14.94 0 0016 31c8.284 0 15-6.716 15-15S24.284 1 16 1zm0 27.5a12.44 12.44 0 01-6.34-1.734l-.454-.27-4.596 1.205 1.227-4.477-.296-.46A12.5 12.5 0 1116 28.5zm6.866-9.353c-.376-.188-2.225-1.098-2.57-1.223-.345-.125-.596-.188-.848.188-.251.376-.972 1.223-1.192 1.474-.22.25-.44.282-.816.094-.376-.188-1.588-.585-3.024-1.865-1.118-.997-1.873-2.228-2.093-2.604-.22-.376-.024-.579.165-.767.17-.169.376-.44.564-.66.189-.22.251-.376.376-.627.126-.25.063-.47-.031-.658-.094-.188-.848-2.044-1.161-2.8-.306-.735-.617-.635-.848-.647l-.722-.012c-.25 0-.658.094-.003.376a15.35 15.35 0 00-1.94 3.014c-.24.573-.013 5.28 3.79 8.094 3.802 2.814 3.802 1.874 4.49 1.757.687-.118 2.225-.91 2.539-1.789.313-.878.313-1.631.22-1.789-.094-.157-.345-.25-.722-.438z"/>
+    </svg>
+  </a>
+  <div class="wa-tooltip">💬 Chat with me on WhatsApp</div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 <span>ABHAY</span> &nbsp;·&nbsp; Forex Trader &nbsp;·&nbsp; All Rights Reserved</p>
+  </footer>
+
+  <!-- FORM HANDLER -->
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const name    = document.getElementById('name').value.trim();
+      const email   = document.getElementById('email').value.trim();
+      const subject = document.getElementById('subject').value;
+      const message = document.getElementById('message').value.trim();
+
+      // Build WhatsApp message
+      const waText = encodeURIComponent(
+        `New inquiry from your website:\n\nName: ${name}\nEmail: ${email}\nTopic: ${subject}\n\nMessage:\n${message}`
+      );
+
+      // ── Option A: Open WhatsApp with prefilled message (replace number below) ──
+      // window.open(`https://wa.me/+918889404609?text=${waText}`, '_blank');
+
+      // ── Option B: Open email client as fallback ──
+      window.location.href =
+        `mailto:00abhayyadav11.email@gmail.com?subject=Website Inquiry: ${subject}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`)}`;
+
+      // Show success message
+      document.getElementById('contactForm').reset();
+      const success = document.getElementById('formSuccess');
+      success.style.display = 'block';
+      setTimeout(() => { success.style.display = 'none'; }, 5000);
     });
-  }, { threshold: 0.1 });
-  reveals.forEach(el => observer.observe(el));
+  </script>
 
-  // Smooth active nav highlight
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-links a');
-  window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(s => {
-      if (window.scrollY >= s.offsetTop - 120) current = s.id;
-    });
-    navLinks.forEach(a => {
-      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--gold)' : '';
-    });
-  });
-</script>
 </body>
 </html>
