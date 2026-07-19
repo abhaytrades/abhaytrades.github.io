@@ -77,7 +77,6 @@
     }
     .nav-links a:hover { color: var(--gold); }
 
-    /* Hide nav links on very small screens, show hamburger alternative */
     @media (max-width: 480px) {
       .nav-links { display: none; }
     }
@@ -336,7 +335,6 @@
       object-fit: cover;
     }
 
-    /* placeholder when image not uploaded yet */
     .cert-placeholder {
       background: var(--accent);
       height: 120px;
@@ -735,7 +733,6 @@
           <p class="cert-phase">Full Evaluation — Challenge + Verification</p>
           <p class="cert-date">PASSED — April 27, 2026</p>
           <div class="cert-img-wrap">
-            <!-- Upload ftmo-cert.jpg to repo — it will appear automatically -->
             <img src="ftmo-cert.jpg" alt="FTMO Certificate"
                  onerror="this.parentNode.innerHTML='<div class=\'cert-placeholder\'>Upload ftmo-cert.jpg</div>'" />
           </div>
@@ -772,7 +769,7 @@
         </div>
       </div>
 
-      <!-- NISM Series 8 — FIXED: now a full visible card -->
+      <!-- NISM Series 8 -->
       <div class="cert-card">
         <div class="cert-badge">✓ CERTIFIED</div>
         <div class="cert-body">
@@ -783,7 +780,20 @@
           <div class="cert-img-wrap">
             <img src="nism8-cert.jpg" alt="NISM Series 8 Certificate"
                  onerror="this.parentNode.innerHTML='<div class=\'cert-placeholder\'>Upload nism8-cert.jpg</div>'" />
-             <img src="nism-xv-cert.jpg" alt="NISM Series 8 Certificate"
+          </div>
+        </div>
+      </div>
+
+      <!-- NISM Series XV -->
+      <div class="cert-card">
+        <div class="cert-badge">✓ CERTIFIED</div>
+        <div class="cert-body">
+          <div class="cert-icon">📜</div>
+          <p class="cert-firm">NISM</p>
+          <p class="cert-phase">Series XV — Research Analyst</p>
+          <p class="cert-date">CERTIFIED</p>
+          <div class="cert-img-wrap">
+            <img src="nism-xv-cert.jpg" alt="NISM Series XV Certificate"
                  onerror="this.parentNode.innerHTML='<div class=\'cert-placeholder\'>Upload nism-xv-cert.jpg</div>'" />
           </div>
         </div>
@@ -794,100 +804,22 @@
 
   <div class="divider"></div>
 
-  <!-- CHART SCREENSHOTS -->
+  <!-- CHART SCREENSHOTS (auto-loaded by script below) -->
   <section id="charts">
     <p class="section-label">// 04 — Chart Analysis</p>
     <h2 class="section-title">TRADE SETUPS</h2>
 
-    <div class="charts-grid">
-      <div class="chart-card">
-        <img src="chart1.jpg" alt="Chart 01"
-             onerror="this.outerHTML='<div class=\'chart-placeholder\'>Chart 01 — Upload chart1.jpg</div>'" />
-        <div class="chart-info">
-          <p class="chart-num">// CHART 01</p>
-          <p class="chart-meta">Pair · Date · Long/Short</p>
-        </div>
-      </div>
-
-      <div class="chart-card">
-        <img src="chart2.jpg" alt="Chart 02"
-             onerror="this.outerHTML='<div class=\'chart-placeholder\'>Chart 02 — Upload chart2.jpg</div>'" />
-        <div class="chart-info">
-          <p class="chart-num">// CHART 02</p>
-          <p class="chart-meta">Pair · Date · Long/Short</p>
-        </div>
-      </div>
-
-      <div class="chart-card">
-        <img src="chart3.jpg" alt="Chart 03"
-             onerror="this.outerHTML='<div class=\'chart-placeholder\'>Chart 03 — Upload chart3.jpg</div>'" />
-        <div class="chart-info">
-          <p class="chart-num">// CHART 03</p>
-          <p class="chart-meta">Pair · Date · Long/Short</p>
-        </div>
-      </div>
-
-      <div class="chart-card">
-        <img src="chart4.jpg" alt="Chart 04"
-             onerror="this.outerHTML='<div class=\'chart-placeholder\'>Chart 04 — Upload chart4.jpg</div>'" />
-        <div class="chart-info">
-          <p class="chart-num">// CHART 04</p>
-          <p class="chart-meta">Pair · Date · Long/Short</p>
-        </div>
-      </div>
-
-      <div class="chart-card">
-        <img src="chart5.jpg" alt="Chart 05"
-             onerror="this.outerHTML='<div class=\'chart-placeholder\'>Chart 05 — Upload chart5.jpg</div>'" />
-        <div class="chart-info">
-          <p class="chart-num">// CHART 05</p>
-          <p class="chart-meta">Pair · Date · Long/Short</p>
-        </div>
-      </div>
-
-      <div class="chart-card">
-        <img src="chart6.jpg" alt="Chart 06"
-             onerror="this.outerHTML='<div class=\'chart-placeholder\'>Chart 06 — Upload chart6.jpg</div>'" />
-        <div class="chart-info">
-          <p class="chart-num">// CHART 06</p>
-          <p class="chart-meta">Pair · Date · Long/Short</p>
-        </div>
-      </div>
-    </div>
+    <div class="charts-grid"></div>
   </section>
 
   <div class="divider"></div>
 
-  <!-- TRADE JOURNAL -->
+  <!-- TRADE JOURNAL (auto-loaded by script below) -->
   <section id="journal">
     <p class="section-label">// 06B — Trade Journal</p>
     <h2 class="section-title">JOURNAL SAMPLES</h2>
 
-    <div class="journal-grid">
-      <div class="journal-card">
-        <img src="journal1.jpg" alt="Journal Entry 01"
-             onerror="this.outerHTML='<div class=\'journal-placeholder\'>Journal 01 — Upload journal1.jpg</div>'" />
-        <div class="journal-info">
-          <p class="journal-num">// JOURNAL ENTRY 01</p>
-        </div>
-      </div>
-
-      <div class="journal-card">
-        <img src="journal2.jpg" alt="Journal Entry 02"
-             onerror="this.outerHTML='<div class=\'journal-placeholder\'>Journal 02 — Upload journal2.jpg</div>'" />
-        <div class="journal-info">
-          <p class="journal-num">// JOURNAL ENTRY 02</p>
-        </div>
-      </div>
-
-      <div class="journal-card">
-        <img src="journal3.jpg" alt="Journal Entry 03"
-             onerror="this.outerHTML='<div class=\'journal-placeholder\'>Journal 03 — Upload journal3.jpg</div>'" />
-        <div class="journal-info">
-          <p class="journal-num">// JOURNAL ENTRY 03</p>
-        </div>
-      </div>
-    </div>
+    <div class="journal-grid"></div>
   </section>
 
   <div class="divider"></div>
@@ -955,11 +887,6 @@
   </section>
 
   <!-- WHATSAPP FLOATING CHAT -->
-  <!--
-    REPLACE +91XXXXXXXXXX with your actual WhatsApp number (with country code, no spaces/dashes).
-    Example for Indian number 9876543210 → +919876543210
-    Set the pre-filled message in the 'text' param below.
-  -->
   <a class="wa-float"
      href="https://wa.me/+91XXXXXXXXXX?text=Hi%20Abhay%2C%20I%20found%20your%20trading%20profile%20and%20wanted%20to%20connect."
      target="_blank"
@@ -986,24 +913,51 @@
       const subject = document.getElementById('subject').value;
       const message = document.getElementById('message').value.trim();
 
-      // Build WhatsApp message
       const waText = encodeURIComponent(
         `New inquiry from your website:\n\nName: ${name}\nEmail: ${email}\nTopic: ${subject}\n\nMessage:\n${message}`
       );
 
-      // ── Option A: Open WhatsApp with prefilled message (replace number below) ──
-      // window.open(`https://wa.me/+918889404609?text=${waText}`, '_blank');
-
-      // ── Option B: Open email client as fallback ──
       window.location.href =
         `mailto:00abhayyadav11.email@gmail.com?subject=Website Inquiry: ${subject}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`)}`;
 
-      // Show success message
       document.getElementById('contactForm').reset();
       const success = document.getElementById('formSuccess');
       success.style.display = 'block';
       setTimeout(() => { success.style.display = 'none'; }, 5000);
     });
+  </script>
+
+  <!-- AUTO-LOAD CHARTS & JOURNAL FROM REPO -->
+  <script>
+    async function loadImagesFromRepo(prefix, gridSelector, cardBuilder) {
+      try {
+        const res = await fetch('https://api.github.com/repos/abhaytrades/abhaytrades.github.io/contents/');
+        const files = await res.json();
+        const matches = files
+          .map(f => f.name)
+          .filter(name => new RegExp(`^${prefix}\\d+\\.(jpg|jpeg|png)$`, 'i').test(name))
+          .sort();
+        const grid = document.querySelector(gridSelector);
+        if (grid) grid.innerHTML = matches.map(cardBuilder).join('');
+      } catch (e) { console.error('Could not load', prefix, e); }
+    }
+
+    loadImagesFromRepo('chart', '#charts .charts-grid', name => `
+      <div class="chart-card">
+        <img src="${name}" alt="Chart" />
+        <div class="chart-info">
+          <p class="chart-num">// ${name.replace(/\.(jpg|jpeg|png)/i,'').toUpperCase()}</p>
+          <p class="chart-meta">Pair · Date · Long/Short</p>
+        </div>
+      </div>`);
+
+    loadImagesFromRepo('journal', '#journal .journal-grid', name => `
+      <div class="journal-card">
+        <img src="${name}" alt="Journal Entry" />
+        <div class="journal-info">
+          <p class="journal-num">// ${name.replace(/\.(jpg|jpeg|png)/i,'').toUpperCase()}</p>
+        </div>
+      </div>`);
   </script>
 
 </body>
